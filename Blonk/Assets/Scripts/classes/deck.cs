@@ -36,7 +36,7 @@ public class Deck
                     switch (a)
                     {
                         case 0:
-                            roll = Mathf.RoundToInt(Random.Range(0, colorCounter.Length+1));
+                            roll = Mathf.RoundToInt(Random.Range(0, colorCounter.Length));
                             if (colorCounter[roll] > 0)
                             {
                                 colorCounter[roll] = colorCounter[roll] - 1;
@@ -46,7 +46,7 @@ public class Deck
                             break;
                         
                         case 1:
-                            roll = Mathf.RoundToInt(Random.Range(0, shapeCounter.Length+1));
+                            roll = Mathf.RoundToInt(Random.Range(0, shapeCounter.Length));
                             if (shapeCounter[roll] > 0)
                             {
                                 shapeCounter[roll] = shapeCounter[roll] - 1;
@@ -56,7 +56,7 @@ public class Deck
                             break;
 
                         case 2:
-                            roll = Mathf.RoundToInt(Random.Range(0, numberCounter.Length+1));
+                            roll = Mathf.RoundToInt(Random.Range(0, numberCounter.Length));
                             if (numberCounter[roll] > 0)
                             {
                                 numberCounter[roll] = numberCounter[roll] - 1;
@@ -78,6 +78,30 @@ public class Deck
     }
 
 
+    //EXPIRMENTAL CONSTRUCTOR, should do the same things as the one above but better
+    /*
+    public Deck()
+    {
+        deck = new Card[60];
+        cardCount = 60;
+        string[] colors = {1, 2, 3, 4, 5, 6};
+        string[] shapes = {1, 2, 3, 4, 5, 6};
+        int[] numbers = {1, 2, 3, 4, 5};
+
+        for (int c = 0; c < 60; c++)
+        {
+            string color = colors[c % colors.Length];
+            string shape = shapes[c % shapes.Length];
+            int number = numbers[c % numbers.Length];
+
+            deck[c] = new Card(color, shape, number);
+        }
+    }
+}
+*/
+
+
+
     //simplified constructor with vairable size
     public Deck(int size)
     {
@@ -85,30 +109,35 @@ public class Deck
         cardCount = 0;
     }
 
-    //changes card in deck array with given card 
-    public void setCard(int cardIndex, Card card)
+
+    //MAIN DECK METHODS
+    
+
+    //adds card to top of deck
+    public void addCard(Card card)
     {
-        deck[cardIndex] = card;
+        cardCount = cardCount + 1;
+        deck[cardCount] = card;
     }
 
-    public void setCardCount(int count)
+    //return top card of deck then remove it 
+    public Card deal()
     {
-        cardCount = count;
+        Card topCard = deck[cardCount];
+        deck[cardCount] = null;
+        cardCount = cardCount - 1;
+        return(topCard);
     }
 
-    public int getCardCount()
-    {
-        return(cardCount);
-    }
 
-    //splits deck between two players *
+
+    //splits deck between two players 
     public void dealPlayers (Player p1, Player p2)
     {
         int pDeckSize = 30;
         Deck tDeck1 = new Deck(pDeckSize);
         Deck tDeck2 = new Deck(pDeckSize);
-        tDeck1.setCardCount(30);
-        tDeck2.setCardCount(30);
+
 
         
 
@@ -116,11 +145,11 @@ public class Deck
         {
             if(i < pDeckSize)
             {
-                tDeck1.setCard(i,deck[i]);
+                tDeck1.addCard(deck[i]);
             }
             else
             {
-                tDeck2.setCard(i-30,deck[i]); 
+                tDeck2.addCard(deck[i]); 
             }
         }
 
@@ -128,11 +157,23 @@ public class Deck
         p2.giveDeck(tDeck2);
     }
 
-    public Card deal()
+    // GET / SET METHODS
+
+
+    //PROBABLY SHOULDNT BE USED: USE ADDCARD AND DEAL INSTEAD
+    
+    //sets the deck index
+    public void setCardCount(int count)
     {
-        //return top card and remove it from deck goes here
-        return(new Card());
+        cardCount = count;
     }
+    //gets the deck index 
+    public int getCardCount()
+    {
+        return(cardCount);
+    }
+
+
 
     
 

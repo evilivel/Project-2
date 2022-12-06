@@ -355,6 +355,8 @@
 "Assets/Scripts/classes/card.cs"
 "Assets/Scripts/classes/deck.cs"
 "Assets/Scripts/classes/player.cs"
+"Assets/Scripts/classes/table.cs"
+"Assets/Scripts/game/Main.cs"
 -langversion:9.0
 
 /deterministic

@@ -8,8 +8,8 @@ public class Card
     // CARDS NEED TO HAVE BUTTONS ON THEM THAT CAN RUN A SCRIPT (MAKE CARDS CLICKABLE)
 
     //card atributes 
-    private string color;
-    private string shape;
+    private int color;
+    private int shape;
     private int number;
     private bool buttonPressed;
     // need to add button to constructors, might also need to add gameobject
@@ -22,47 +22,52 @@ public class Card
     //defult construtor: random stats, only used for testing
     public Card()
     {
-        color = colors[Mathf.RoundToInt(Random.Range(1, 7))];
-        shape = shapes[Mathf.RoundToInt(Random.Range(1, 7))];
+        color = Mathf.RoundToInt(Random.Range(0, 6));
+        shape = Mathf.RoundToInt(Random.Range(0, 6));
         number = Mathf.RoundToInt(Random.Range(1, 6));
-        //button = new Button();
+        
 
     }
     
     //consturtor: color , shape , number 
-    public Card(string tColor,string tShape, int tNumber)
+    public Card(int tColor,int tShape, int tNumber)
     {
         color = tColor;
         shape = tShape;
         number = tNumber;
-        //button = new Button();
+        
     }
     
-    //construtor: uses int insted of strings
-    public Card(int tColor, int tShape, int tNumber)
+
+    //MAIN CARD METHODS
+
+    public bool CompCard (Card tcard)
     {
-        if(tColor < 6)
+        if(color == tcard.Color() || shape == tcard.Shape() || number == tcard.Number())
         {
-            color = colors[tColor];
+            return(true);
         }
-        if(tShape < 6)
+        else
         {
-             shape = shapes[tShape];
+            return(false);
         }
 
-        number = tNumber;
-        //button = new Button();
     }
-    
+
+
+
+
+
+    //GET / SET METHODS
 
     // return color of card
-    public string Color()
+    public int Color()
     {
         return (color);
     }
     
     //return shape of card
-    public string Shape()
+    public int Shape()
     {
         return (shape);
     }
@@ -73,24 +78,22 @@ public class Card
         return (number);
     }
 
-    //return if button is pressed
-    public bool Button()
+    // sets true if false and false if true (toggle)
+    public void ButtonFlip()
     {
-        return (buttonPressed);
+        if (buttonPressed == true)
+        {
+            buttonPressed = false;
+        }
+        else
+        {
+            buttonPressed = true;
+        }
     }
 
 
 
-    // set buttonPressed to true when clicked, cant get button to work without gameobject
-    void Start()
-    {
-      //button.onClick.AddListener(TaskOnClick);
-      
-    }
 
-    void TaskOnClick()
-    {
-        //buttonPressed=true;
 
-    }
+
 }
