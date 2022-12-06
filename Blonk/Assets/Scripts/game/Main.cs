@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.
+//using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Main : MonoBehaviour
@@ -14,6 +14,19 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        /*public void LoseLeve()
+         * {
+         *      if(GameEnded == false)
+         *      {
+         *          Debug.Log("Game Over");
+         *          GameEnded = true;
+         *          
+         *          SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+         *      }
+         * }
+         * */
+
 
 
       /*

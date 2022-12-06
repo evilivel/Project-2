@@ -49,10 +49,41 @@ public class Table
         {
             tableDeck2.addCard(currentCard);
         }
+
         // if no cards where selected or the card did not match the top card of either deck
+        //do nothing
 
     }
+
+    public void player2Play()
+    {
+        //might put ai info here 
+    }
+
+
+    //checks if either players deck is empty, returns true if game is over and false if it is not
+    // just relized i should add something to check if the hand is empty as well 
+    public bool checkGameOver()
+    {
+        int p1DeckSize = player1.getDeck().getCardCount(); 
+        int p2DeckSize = player2.getDeck().getCardCount();
+        
+        if(p1DeckSize < 1)
+        {
+            gameOver = true;
+            Debug.Log("player 1 wins")
+        }
+
+        if(p2DeckSize < 1)
+        {
+            gameOver = true;
+            Debug.Log("player 2 wins")
+        }
+
+        return (gameOver);
+    }
     
+    // probably need to add method to check if either player has a playable card (check if game is stuck and deal card from one of the players decks to unstick it)
 
 
 
