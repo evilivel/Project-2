@@ -11,6 +11,7 @@ public class Table
     private Player player2;
 
     private bool gameOver;
+    private int fDeckIndex;
 
     public Table()
     {
@@ -33,6 +34,27 @@ public class Table
 
         
     }
+    
+
+    // method that playes selected card onto correct deck if they match
+    public void player1Play()
+    {
+        Card currentCard = player1.handCheck(tableDeck1.getTopCard(), tableDeck2.getTopCard(), fDeckIndex);
+
+        if(fDeckIndex = 1)
+        {
+            tableDeck1.addCard(currentCard);
+        }
+        else if (fDeckIndex = 2)
+        {
+            tableDeck2.addCard(currentCard);
+        }
+        // if no cards where selected or the card did not match the top card of either deck
+
+    }
+    
+
+
 
 
 

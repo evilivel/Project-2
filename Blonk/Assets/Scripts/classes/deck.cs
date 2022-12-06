@@ -159,6 +159,11 @@ public class Deck
 
     // GET / SET METHODS
 
+    public Card getTopCard()
+    {
+        return(deck[cardCount]);
+    }
+
 
     //PROBABLY SHOULDNT BE USED: USE ADDCARD AND DEAL INSTEAD
     

@@ -61,18 +61,28 @@ public class Card
     //GET / SET METHODS
 
     // return color of card
+
+    public bool Button()
+    {
+        return(buttonPressed);
+    }
+
+    // return color of card
+
     public int Color()
     {
         return (color);
     }
     
     //return shape of card
+
     public int Shape()
     {
         return (shape);
     }
 
     //return number of card
+    
     public int Number()
     {
         return (number);

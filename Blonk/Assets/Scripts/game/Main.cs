@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.
 using UnityEngine;
 
 public class Main : MonoBehaviour
@@ -13,7 +14,9 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+
+
+      /*
       if (Input.GetMouseButtonDown(0))
       {
         // get the position of the mouse cursor on the screen
