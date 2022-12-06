@@ -31,7 +31,6 @@ public class Table
        //move top card of each player deck to table deck 
        tableDeck1.addCard(player1.getDeck().deal());
        tableDeck2.addCard(player2.getDeck().deal());
-
         
     }
     
@@ -71,13 +70,13 @@ public class Table
         if(p1DeckSize < 1)
         {
             gameOver = true;
-            Debug.Log("player 1 wins")
+            Debug.Log("player 1 wins");
         }
 
         if(p2DeckSize < 1)
         {
             gameOver = true;
-            Debug.Log("player 2 wins")
+            Debug.Log("player 2 wins");
         }
 
         return (gameOver);
