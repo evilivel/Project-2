@@ -31,8 +31,14 @@ public class Table
        player2.moveHand();
 
        //move top card of each player deck to table deck 
-       tableDeck1.addCard(player1.getDeck().deal());
-       tableDeck2.addCard(player2.getDeck().deal());
+       Card tCard1 = player1.getDeck().deal();
+       Card tCard2 = player2.getDeck().deal();
+
+       tableDeck1.addCard(tCard1);
+       tableDeck2.addCard(tCard2);
+
+       tCard1.getGO().transform.position = new Vector3(1,0,-.5f);
+       tCard2.getGO().transform.position = new Vector3(-1,0,-.5f);
         
     }
     
@@ -41,13 +47,16 @@ public class Table
     public void player1Play()
     {
         Card currentCard = player1.handCheck(tableDeck1.getTopCard(), tableDeck2.getTopCard(), ref fDeckIndex);
+        player1.moveHand();
 
         if(fDeckIndex == 1)
         {
+            currentCard.getGO().transform.position = new Vector3(1,0,-.5f);
             tableDeck1.addCard(currentCard);
         }
         else if (fDeckIndex == 2)
         {
+            currentCard.getGO().transform.position = new Vector3(-1,0,-.5f);
             tableDeck2.addCard(currentCard);
         }
 

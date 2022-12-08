@@ -11,7 +11,7 @@ public class Main : MonoBehaviour
     private string c1;
     private string c2;
     private string c3;
-
+    Table currentTable;
 
 
 
@@ -19,17 +19,7 @@ public class Main : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Table currentTable = new Table();
-        textures = Resources.LoadAll("cards", typeof(Texture2D));
-
-        foreach (var t in textures)
-        {
-          string[] words = t.name.Split(' ');
-          foreach (var i in words)
-          {
-            Debug.Log(i);
-          }
-        }
+        currentTable = new Table();
         
     }
 
@@ -37,9 +27,27 @@ public class Main : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetMouseButtonDown(0))
+        {
+          // get the position of the mouse cursor on the screen
+          Vector3 mousePosition = Input.mousePosition;
+
+          // convert the mouse position to world coordinates
+          Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+          // create a raycast to check if the player clicked on a card
+          RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
+
+          if (hit.collider != null)
+          {
+            Debug.Log(hit.point);
+
+          }
+        }
 
 
-      /*
+
+      
       currentTable.player1Play();
       
       // something to make AI player work goes here
@@ -47,12 +55,12 @@ public class Main : MonoBehaviour
       if(currentTable.checkGameOver() == true)
       {
         Debug.Log("Game Over");
-        GameEnded = true;
+        //GameEnded = true;
                   
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         
       }
-      */
+      
 
       
 
