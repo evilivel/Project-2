@@ -8,14 +8,15 @@ public class Player
     private Card[] hand;
     private Deck deck;
     private int handSize = 3;
-    private int dificulty; 
+    private int dificulty;
+    private int side; 
 
 
     //defuat construtor: for testing, makes empty hand of handS
-    public Player()
+    public Player(int Side)
     {
         hand = new Card[handSize];
-        //deck = new Deck();
+        side = Side;
     }
 
 
@@ -72,9 +73,15 @@ public class Player
             }
         }
 
+
+
         fDeckIndex = 0;
         return (tcard);
     }
+
+
+    //move a card from hand to 
+
 
     //deals 3 cards to hand
     public void dealHand()
@@ -82,7 +89,42 @@ public class Player
         for (int i=0; i<handSize; i++)
         {
             hand[i] = deck.deal();
+
         }
+
+    }
+
+    public void moveHand()
+    {
+        int side1Position = 2;
+        int side2Position = -3;
+        int currentPosition;
+
+        if(side == 1)
+        {
+            currentPosition = side1Position;
+        }
+        else
+        {
+            currentPosition = side2Position;
+        }
+
+        for (int i=0; i<handSize; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    hand[i].getGO().transform.position = new Vector3(1.5f,0,currentPosition);
+                break;
+                case 1:
+                    hand[i].getGO().transform.position = new Vector3(0,0,currentPosition);
+                break;
+                case 2:
+                    hand[i].getGO().transform.position = new Vector3(-1.5f,0,currentPosition);
+                break;
+            }  
+        }
+
     }
 
 

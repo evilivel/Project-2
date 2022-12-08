@@ -17,9 +17,9 @@ public class Table
     {
        gameOver  = false;
        tableDeck1 = new Deck(60);
-       tableDeck1 = new Deck(60);
-       player1 = new Player();
-       player2 = new Player();
+       tableDeck2 = new Deck(60);
+       player1 = new Player(1);
+       player2 = new Player(2);
 
        // creates a new deck using defult constructor and splits it between two players 
        new Deck().dealPlayers(player1, player2);
@@ -27,6 +27,8 @@ public class Table
        //fills both players hand
        player1.dealHand();
        player2.dealHand();
+       player1.moveHand();
+       player2.moveHand();
 
        //move top card of each player deck to table deck 
        tableDeck1.addCard(player1.getDeck().deal());
@@ -38,13 +40,13 @@ public class Table
     // method that playes selected card onto correct deck if they match
     public void player1Play()
     {
-        Card currentCard = player1.handCheck(tableDeck1.getTopCard(), tableDeck2.getTopCard(), fDeckIndex);
+        Card currentCard = player1.handCheck(tableDeck1.getTopCard(), tableDeck2.getTopCard(), ref fDeckIndex);
 
-        if(fDeckIndex = 1)
+        if(fDeckIndex == 1)
         {
             tableDeck1.addCard(currentCard);
         }
-        else if (fDeckIndex = 2)
+        else if (fDeckIndex == 2)
         {
             tableDeck2.addCard(currentCard);
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card
 {
@@ -11,30 +12,72 @@ public class Card
     private int color;
     private int shape;
     private int number;
+    private GameObject GO;
     private bool buttonPressed;
-    // need to add button to constructors, might also need to add gameobject
-    //private Button button;
+
 
     //These arrays of the posible shapes and colors gives me more options for constructors 
-    private string[] colors = new string[6] {"red", "yellow", "green", "blue", "purple", "grey"};
-    private string[] shapes = new string[6] {"triangle", "diamond", "circle", "bolt", "star", "x"};
+    private string[] hats = new string[6] {"nohat", "partyhat", "crown", "tophat", "sombrero", "propellerhat"};
+    private string[] shapes = new string[6] {"bonk", "chonk", "honk", "monk", "stonk", "stronk"};
+    private string[] numbers = new string[6] {"single", "double", "triple", "four", "five",""};
 
+    
+    
+    
     //defult construtor: random stats, only used for testing
     public Card()
     {
+
+
         color = Mathf.RoundToInt(Random.Range(0, 6));
         shape = Mathf.RoundToInt(Random.Range(0, 6));
         number = Mathf.RoundToInt(Random.Range(1, 6));
         
 
     }
-    
+
     //consturtor: color , shape , number 
-    public Card(int tColor,int tShape, int tNumber)
+    public Card(Object texture)
     {
-        color = tColor;
-        shape = tShape;
-        number = tNumber;
+        string[] words = texture.name.Split(' ');
+        foreach (var i in words)
+        {
+            for (int a = 0; a < 6; a++)
+            {
+                if (hats[a] == i)
+                {
+                    color = a;
+                }
+
+                if (shapes[a] == i)
+                {
+                    shape = a;
+                }
+                if (numbers[a] == i)
+                {
+                    number =a;
+                }
+
+            }
+        }
+
+        //LINE TO MAKE GAMEOBJECT AND PUT TEXTURE ON IT 
+
+        Texture2D Texture = (Texture2D)texture;
+        GO = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        GO.transform.localScale = new Vector3(.14f,.14f,.2f);
+        
+        
+        GO.GetComponent<Renderer>().material.mainTexture = Texture;
+
+        //RawImage pic = texture.AddComponent<GameObject>().AddComponent<RawImage>();
+        //RawImage GOimage = GO.AddComponent<RawImage>();
+        //GOimage.texture = texture;
+        
+
+        //color = tColor;
+        //shape = tShape;
+        //umber = tNumber;
         
     }
     
@@ -59,6 +102,13 @@ public class Card
 
 
     //GET / SET METHODS
+
+
+    //returns game object
+    public GameObject getGO()
+    {
+        return (GO);
+    }
 
     // return color of card
 

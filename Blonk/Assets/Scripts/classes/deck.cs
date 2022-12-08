@@ -14,6 +14,31 @@ public class Deck
     //constructor, returns deck of correct cards, 10 of each color / shape and 12 of each number 
     public Deck()
     {
+        Object[] textures = Resources.LoadAll("cards", typeof(Texture2D));
+        deck = new Card[60];
+        cardCount = 59;
+
+        
+        for (int c = 0; c < 60; c++)
+        {
+            deck[c] = new Card(textures[c]);
+            
+            Debug.Log(c);
+
+        }
+
+        //might need to move cards on field 
+    
+    }
+
+
+
+
+
+
+/*
+    public Deck()
+    {
         deck = new Card[60];
         cardCount = 60;
         int[] colorCounter = new int[6] {10,10,10,10,10,10};
@@ -79,7 +104,7 @@ public class Deck
 
 
     //EXPIRMENTAL CONSTRUCTOR, should do the same things as the one above but better
-    /*
+    
     public Deck()
     {
         deck = new Card[60];
@@ -116,17 +141,36 @@ public class Deck
     //adds card to top of deck
     public void addCard(Card card)
     {
-        cardCount = cardCount + 1;
-        deck[cardCount] = card;
+        if (deck[cardCount] == null)
+        {
+            deck[cardCount] = card;
+        }
+        else
+        {
+            cardCount = cardCount + 1;
+            deck[cardCount] = card;
+        }
+
     }
 
     //return top card of deck then remove it 
     public Card deal()
     {
-        Card topCard = deck[cardCount];
-        deck[cardCount] = null;
-        cardCount = cardCount - 1;
-        return(topCard);
+        if (cardCount >= 0)
+        {
+            Card topCard = deck[cardCount];
+            deck[cardCount] = null;
+            cardCount = cardCount - 1;
+            return(topCard);
+
+        }
+        else
+        {
+            Debug.Log("help");
+            return(null);
+        }
+
+        
     }
 
 
@@ -141,15 +185,20 @@ public class Deck
 
         
 
-        for (int i = 0; i < deck.Length; i++)
+        for (int i = 0; i < 60; i++)
         {
             if(i < pDeckSize)
             {
+                //mabe use deal instead of loop index
+                deck[i].getGO().transform.position = new Vector3(4.5f,0,1.5f);
                 tDeck1.addCard(deck[i]);
             }
             else
             {
+                deck[i].getGO().transform.position = new Vector3(-4.5f,0,-1.5f);
+                Debug.Log("player2 card " + (i-30));
                 tDeck2.addCard(deck[i]); 
+                Debug.Log(tDeck2.getTopCard());
             }
         }
 

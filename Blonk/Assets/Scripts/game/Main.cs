@@ -5,10 +5,31 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
+
+    private Object[] textures;
+    private GameObject go;
+    private string c1;
+    private string c2;
+    private string c3;
+
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-      public Table currentTable = new Table();
+        Table currentTable = new Table();
+        textures = Resources.LoadAll("cards", typeof(Texture2D));
+
+        foreach (var t in textures)
+        {
+          string[] words = t.name.Split(' ');
+          foreach (var i in words)
+          {
+            Debug.Log(i);
+          }
+        }
         
     }
 
@@ -16,6 +37,9 @@ public class Main : MonoBehaviour
     void Update()
     {
 
+
+
+      /*
       currentTable.player1Play();
       
       // something to make AI player work goes here
@@ -26,7 +50,9 @@ public class Main : MonoBehaviour
         GameEnded = true;
                   
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
       }
+      */
 
       
 
@@ -68,4 +94,31 @@ public class Main : MonoBehaviour
          * */
     }
 
+
+
+
+
+/*
+ * public class CardController : Monobehaviour 
+ * {
+ *      public Card card;
+ *      public Image illustration;
+ *      
+ *      private void Awake()
+ *      {
+ *         Initialize(card);
+ *      }
+ *      
+ *      private void Start()
+ *      {
+ *      
+ *      }
+ *      
+ *      public void Initialize(Card card)
+ *      {
+ *          illustration.sprite =  card.illustration;
+ *      }
+ *      
+ *      private void Update()
+*/  
 }
