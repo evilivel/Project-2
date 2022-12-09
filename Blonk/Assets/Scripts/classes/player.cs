@@ -131,6 +131,12 @@ public class Player
     // GET / SET METHODS
 
     //replaces players deck with given deck
+    public Card[] getHand()
+    {
+        return(hand);
+    }
+
+
     public void giveDeck(Deck tDeck)
     {
         deck = tDeck;

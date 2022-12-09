@@ -63,12 +63,83 @@ public class Card
 
         //LINE TO MAKE GAMEOBJECT AND PUT TEXTURE ON IT 
 
+
+
         Texture2D Texture = (Texture2D)texture;
         GO = GameObject.CreatePrimitive(PrimitiveType.Plane);
         GO.transform.localScale = new Vector3(.14f,.14f,.2f);
         
         
         GO.GetComponent<Renderer>().material.mainTexture = Texture;
+
+        //RawImage pic = texture.AddComponent<GameObject>().AddComponent<RawImage>();
+        //RawImage GOimage = GO.AddComponent<RawImage>();
+        //GOimage.texture = texture;
+        
+
+        //color = tColor;
+        //shape = tShape;
+        //umber = tNumber;
+        
+    }
+
+    //consturtor: color , shape , number 
+    public Card(Object texture, Canvas canvas)
+    {
+        string[] words = texture.name.Split(' ');
+        foreach (var i in words)
+        {
+            for (int a = 0; a < 6; a++)
+            {
+                if (hats[a] == i)
+                {
+                    color = a;
+                }
+
+                if (shapes[a] == i)
+                {
+                    shape = a;
+                }
+                if (numbers[a] == i)
+                {
+                    number =a;
+                }
+
+            }
+        }
+
+        //LINE TO MAKE GAMEOBJECT AND PUT TEXTURE ON IT 
+
+      
+
+        GameObject imgObject = new GameObject("card");
+        
+
+
+        RectTransform trans = imgObject.AddComponent<RectTransform>();
+        imgObject.AddComponent<Button>();
+        imgObject.GetComponent<Button>().onClick.AddListener(TaskOnClick);
+        trans.transform.SetParent(canvas.transform); // setting parent
+        trans.localScale = Vector3.one;
+        trans.anchoredPosition = new Vector2(0f, 0f); // setting position, will be on center
+        trans.sizeDelta= new Vector2(125, 175); // custom size
+        trans.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        Image image = imgObject.AddComponent<Image>();
+        Texture2D tex = (Texture2D)texture;
+        image.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+        imgObject.transform.SetParent(canvas.transform);
+
+        GO = imgObject;
+
+//my stuff
+
+        //Texture2D Texture = (Texture2D)texture;
+        //GO = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        //GO.transform.localScale = new Vector3(.14f,.14f,.2f);
+        
+        
+        //GO.GetComponent<Renderer>().material.mainTexture = Texture;
 
         //RawImage pic = texture.AddComponent<GameObject>().AddComponent<RawImage>();
         //RawImage GOimage = GO.AddComponent<RawImage>();
@@ -150,6 +221,13 @@ public class Card
             buttonPressed = true;
         }
     }
+
+        void TaskOnClick()
+    {
+        ButtonFlip();
+        //Debug.Log("You have clicked the button!");
+    }
+
 
 
 

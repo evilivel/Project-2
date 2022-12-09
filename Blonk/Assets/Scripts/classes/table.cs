@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Table
 {
@@ -13,8 +14,11 @@ public class Table
     private bool gameOver;
     private int fDeckIndex;
 
-    public Table()
+    private Canvas canvas;
+
+    public Table(Canvas canvass)
     {
+       canvas  = canvass;
        gameOver  = false;
        tableDeck1 = new Deck(60);
        tableDeck2 = new Deck(60);
@@ -22,7 +26,7 @@ public class Table
        player2 = new Player(2);
 
        // creates a new deck using defult constructor and splits it between two players 
-       new Deck().dealPlayers(player1, player2);
+       new Deck(canvas).dealPlayers(player1, player2);
 
        //fills both players hand
        player1.dealHand();
@@ -52,11 +56,13 @@ public class Table
         if(fDeckIndex == 1)
         {
             currentCard.getGO().transform.position = new Vector3(1,0,-.5f);
+            tableDeck1.getTopCard().getGO().SetActive(false);
             tableDeck1.addCard(currentCard);
         }
         else if (fDeckIndex == 2)
         {
             currentCard.getGO().transform.position = new Vector3(-1,0,-.5f);
+            tableDeck2.getTopCard().getGO().SetActive(false);
             tableDeck2.addCard(currentCard);
         }
 
@@ -67,7 +73,25 @@ public class Table
 
     public void player2Play()
     {
-        //might put ai info here 
+
+
+            Card currentCard = player2.handCheck(tableDeck1.getTopCard(), tableDeck2.getTopCard(), ref fDeckIndex);
+            player2.moveHand();
+
+            if(fDeckIndex == 1)
+            {
+                currentCard.getGO().transform.position = new Vector3(1,0,-.5f);
+                tableDeck1.getTopCard().getGO().SetActive(false);
+                tableDeck1.addCard(currentCard);
+            }
+            else if (fDeckIndex == 2)
+            {
+                currentCard.getGO().transform.position = new Vector3(-1,0,-.5f);
+                tableDeck2.getTopCard().getGO().SetActive(false);
+                tableDeck2.addCard(currentCard);
+            }
+
+        
     }
 
 
@@ -77,26 +101,65 @@ public class Table
     {
         int p1DeckSize = player1.getDeck().getCardCount(); 
         int p2DeckSize = player2.getDeck().getCardCount();
-        
-        if(p1DeckSize < 1)
+        if(gameOver == false)
         {
-            gameOver = true;
-            Debug.Log("player 1 wins");
-        }
+            if(p1DeckSize < 1)
+            {
+                gameOver = true;
+                Debug.Log("Game Over");
+                Debug.Log("player 1 wins");
 
-        if(p2DeckSize < 1)
-        {
-            gameOver = true;
-            Debug.Log("player 2 wins");
+                //SCENE CHANGE********************
+
+
+            }
+
+            if(p2DeckSize < 1)
+            {
+                gameOver = true;
+                Debug.Log("Game Over");
+                Debug.Log("player 2 wins");
+
+                //SCENE CHANGE********************
+
+
+            }
+
         }
+        
 
         return (gameOver);
     }
     
     // probably need to add method to check if either player has a playable card (check if game is stuck and deal card from one of the players decks to unstick it)
+    public Player getPlayer()
+    {
+        return(player2);
+    }
 
+    /*
 
+                GameObject gameOverButton = new GameObject("button");
+                RectTransform trans = gameOverButton.AddComponent<RectTransform>();
+                gameOverButton.AddComponent<Button>();
+                gameOverButton.GetComponent<Button>().onClick.AddListener(TaskOnClick);
+                trans.transform.SetParent(canvas.transform); // setting parent
+                trans.localScale = Vector3.one;
+                trans.anchoredPosition = new Vector2(0f, 0f); // setting position, will be on center
+                trans.sizeDelta= new Vector2(125, 175); // custom size
+                trans.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                
+                Text stuff = gameOverButton.AddComponent<Text>();
+                
+                stuff.text = "BUTTS";
 
+                gameOverButton.transform.SetParent(canvas.transform);
 
+        void TaskOnClick()
+    {
+        
+        Debug.Log("You have clicked the button!!!!!!!!!!!!");
+    }
+*/
 
 }
