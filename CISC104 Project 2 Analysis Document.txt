@@ -1,0 +1,47 @@
+﻿Levi, Cristhina, Katie, Chianna
+Project 2: The Group Project
+CISC 104
+University of Delaware
+Project 2: Blonk
+
+
+A document to describe any history/origin of the game as well as how to play.
+
+
+The game of Blink is more focused on speed and observation instead of taking turns. The players are each given a deck of cards and without taking turns, two players race one another to see who can match the shape, color, or count on their cards to the top card in either one of two discard piles. The first person to play all the cards from their draw pile wins the game. Blonk is based on Blink, but with a few changes in name and design. The rules and play have a few minor changes as well. 
+
+
+The team came into the project confident in the concept but semi-unsure about how to tackle the coding aspect of the project since some members have never worked with C# heavily. The team connection is really strong and very collaborative. They are very open when it comes to being confused about certain concepts or unsure about what they should do in order to contribute to the project. 
+
+
+Rules: 
+
+
+1. Both players are given a pile of cards (if the total card amount is 60, each player receives 30 cards)
+2. In the player's hands will be 3 cards
+3. Between the two players will be two cards face up
+4. Each player is tasked to match character, hat, and/or number to the face-up cards
+5. Characters can only be matched with the same character
+6. Hats can only be matched with the same hat
+7. Numbers can only be matched with the same number
+Ex: For instance, a card with four geese with party hats could be played on any card with geese (character), or on a card with party hats (hat), or on a card with four characters (count).
+8. Once either player runs out of cards to play they win.
+
+
+
+
+
+
+A document to describe how the group approached the project and distributed work.
+
+
+Levi: Code
+
+
+Chianna: Project Document/Code
+
+
+Cristina: UI/code
+
+
+Katie: Code/Card Art
