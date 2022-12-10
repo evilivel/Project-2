@@ -10,57 +10,45 @@ public class Main : MonoBehaviour
     public Canvas canvas;
     public Table currentTable;
     public bool GameEnded;
+    public bool Win1;
+    public bool Win2;
+
+
+    
+    public GameObject winMenu;
+    public GameObject loseMenu;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        GameEnded = false;
         canvas = gameObject.GetComponent<Canvas>();
         currentTable = new Table(canvas);
         StartCoroutine(AI());
-        GameEnded = false;
         
-        //Deck test = new Deck(canvas);
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetMouseButtonDown(0))
-        {
-          // get the position of the mouse cursor on the screen
-          Vector3 mousePosition = Input.mousePosition;
-
-          // convert the mouse position to world coordinates
-          Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-          // create a raycast to check if the player clicked on a card
-          RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
-
-          if (hit.collider != null)
-          {
-            Debug.Log(hit.point);
-
-          }
-        }
-
-
-
       
       currentTable.player1Play();
       
-      
-
-
-
-
-
-
-      if(currentTable.checkGameOver() == true)
+      if(currentTable.checkGameOver(ref Win1,ref Win2) == true)
       {
         //Debug.Log("Game Over");
         GameEnded = true;
+        if(Win1 == true)
+        {
+            winMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else if (Win2 == true)
+        {
+            loseMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
                   
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         

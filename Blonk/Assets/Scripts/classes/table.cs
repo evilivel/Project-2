@@ -16,6 +16,8 @@ public class Table
 
     private Canvas canvas;
 
+
+
     public Table(Canvas canvass)
     {
        canvas  = canvass;
@@ -97,7 +99,7 @@ public class Table
 
     //checks if either players deck is empty, returns true if game is over and false if it is not
     // just relized i should add something to check if the hand is empty as well 
-    public bool checkGameOver()
+    public bool checkGameOver(ref bool Win1, ref bool Win2)
     {
         int p1DeckSize = player1.getDeck().getCardCount(); 
         int p2DeckSize = player2.getDeck().getCardCount();
@@ -108,8 +110,9 @@ public class Table
                 gameOver = true;
                 Debug.Log("Game Over");
                 Debug.Log("player 1 wins");
+                Win1 = true;
 
-                //SCENE CHANGE********************
+
 
 
             }
@@ -119,8 +122,10 @@ public class Table
                 gameOver = true;
                 Debug.Log("Game Over");
                 Debug.Log("player 2 wins");
+                Win2 = true;
 
                 //SCENE CHANGE********************
+
 
 
             }
